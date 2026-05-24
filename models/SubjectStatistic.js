@@ -1,20 +1,20 @@
 const mongoose = require('mongoose');
 
 const subjectStatisticSchema = new mongoose.Schema({
-  subjectId: {
+  subject: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: 'Subject',
-    required: true,
-    unique: true
+    ref: 'Subject'
   },
-  totalAttempts: {
+  totalExams: {
     type: Number,
     default: 0
   },
-  averageScore: {
+  avgScore: {
     type: Number,
     default: 0
   }
+}, {
+  timestamps: true
 });
 
 module.exports = mongoose.model('SubjectStatistic', subjectStatisticSchema);

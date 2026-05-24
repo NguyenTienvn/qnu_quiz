@@ -1,53 +1,26 @@
 const mongoose = require('mongoose');
 
-const questionOptionSchema = new mongoose.Schema(
-  {
-    optionText: {
-      type: String,
-      required: true,
-      trim: true
-    },
-    isCorrect: {
-      type: Boolean,
-      default: false
-    }
+const questionSchema = new mongoose.Schema({
+  subject: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Subject',
+    required: true
   },
-  {
-    _id: true
-  }
-);
-
-const questionSchema = new mongoose.Schema(
-  {
-    subjectId: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: 'Subject',
-      required: true,
-      index: true
-    },
-    content: {
-      type: String,
-      required: true,
-      trim: true
-    },
-    difficulty: {
-      type: String,
-      enum: ['easy', 'medium', 'hard'],
-      default: 'medium'
-    },
-    options: {
-      type: [questionOptionSchema],
-      validate: {
-        validator(options) {
-          return options.length >= 2;
-        },
-        message: 'A question must have at least two options'
-      }
-    }
+  content: {
+    type: String,
+    required: true
   },
-  {
-    timestamps: { createdAt: 'createdAt', updatedAt: false }
+  optionA: String,
+  optionB: String,
+  optionC: String,
+  optionD: String,
+  correctAnswer: {
+    type: String,
+    enum: ['A', 'B', 'C', 'D'],
+    required: true
   }
-);
+}, {
+  timestamps: true
+});
 
 module.exports = mongoose.model('Question', questionSchema);

@@ -6,6 +6,7 @@ const {
   updateSubject,
   deleteSubject
 } = require('../controllers/subjectController');
+
 const authMiddleware = require('../middleware/authMiddleware');
 const adminMiddleware = require('../middleware/adminMiddleware');
 

@@ -1,19 +1,16 @@
 const express = require('express');
 const {
-  getPracticeList,
-  startExam,
+  createExam,
   submitExam,
-  getExamHistory,
-  getExamById
+  getMyExams
 } = require('../controllers/examController');
+
 const authMiddleware = require('../middleware/authMiddleware');
 
 const router = express.Router();
 
-router.get('/practice-list', getPracticeList);
-router.post('/start', authMiddleware, startExam);
-router.post('/:examId/submit', authMiddleware, submitExam);
-router.get('/history', authMiddleware, getExamHistory);
-router.get('/:examId', authMiddleware, getExamById);
+router.post('/create', authMiddleware, createExam);
+router.post('/submit', authMiddleware, submitExam);
+router.get('/my-exams', authMiddleware, getMyExams);
 
 module.exports = router;

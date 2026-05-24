@@ -1,9 +1,13 @@
 const express = require('express');
-const { getMyStatistics } = require('../controllers/statisticController');
+const {
+  getStatistics
+} = require('../controllers/statisticController');
+
 const authMiddleware = require('../middleware/authMiddleware');
+const adminMiddleware = require('../middleware/adminMiddleware');
 
 const router = express.Router();
 
-router.get('/me', authMiddleware, getMyStatistics);
+router.get('/', authMiddleware, adminMiddleware, getStatistics);
 
 module.exports = router;

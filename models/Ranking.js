@@ -1,17 +1,11 @@
 const mongoose = require('mongoose');
 
 const rankingSchema = new mongoose.Schema({
-  studentId: {
+  user: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: 'Student',
-    required: true
+    ref: 'User'
   },
-  subjectId: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'Subject',
-    required: true
-  },
-  averageScore: {
+  avgScore: {
     type: Number,
     default: 0
   },
@@ -19,16 +13,12 @@ const rankingSchema = new mongoose.Schema({
     type: Number,
     default: 0
   },
-  totalAttempts: {
+  attemptCount: {
     type: Number,
     default: 0
-  },
-  rankPosition: {
-    type: Number,
-    default: null
   }
+}, {
+  timestamps: true
 });
-
-rankingSchema.index({ studentId: 1, subjectId: 1 }, { unique: true });
 
 module.exports = mongoose.model('Ranking', rankingSchema);
